@@ -1,26 +1,15 @@
 <template>
-  <div class="counter-wrapper">
-
-    <md-whiteframe>
-      <md-toolbar>
-        <md-button class="md-icon-button">
-          <md-icon md-src="icons/zi.svg"></md-icon>
-        </md-button>
-
-        <h2 class="md-title" style="flex: 1">Default</h2>
-
-        <md-button class="md-icon-button">
-          <md-icon md-src="icons/homework.svg"></md-icon>
-        </md-button>
-      </md-toolbar>
-    </md-whiteframe>
+  <div class="counter-wrapper" layout="page">
 
     <div class="counter">
       {{ count }}
     </div>
-    <md-button @click="$store.commit('INCREMENT')">Increment</md-button>
-    <md-button @click="$store.commit('DECREMENT')">Decrement</md-button>
-    <md-button @click="$store.dispatch('incrementAsync')">Increment Async</md-button>
+
+    <div layout="row" flex layout-align="space-between">
+      <md-button @click="$store.commit('INCREMENT')">Increment</md-button>
+      <md-button @click="$store.commit('DECREMENT')">Decrement</md-button>
+      <md-button @click="$store.dispatch('incrementAsync')">Increment Async</md-button>
+    </div>
   </div>
 </template>
 
