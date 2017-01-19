@@ -4,8 +4,9 @@ import App from './components/App'
 
 var VueMaterial = require('vue-material')
 require('vue-material/dist/vue-material.css')
+require('../static/css/layout.css')
 
-import router from './router'
+import router from './router/router'
 import store from './store'
 sync(store, router)
 
