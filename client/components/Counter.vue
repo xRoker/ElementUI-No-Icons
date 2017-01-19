@@ -5,7 +5,7 @@
       {{ count }}
     </div>
 
-    <div layout="row" flex layout-align="space-between">
+    <div layout="row" align="center">
       <md-button @click="$store.commit('INCREMENT')">Increment</md-button>
       <md-button @click="$store.commit('DECREMENT')">Decrement</md-button>
       <md-button @click="$store.dispatch('incrementAsync')">Increment Async</md-button>

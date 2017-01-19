@@ -16,6 +16,13 @@ const app = new Vue({
   ...App
 })
 
-Vue.use(VueMaterial)
+
+// Vue Material
+// Vue.use(VueMaterial)
+Vue.use(VueMaterial.MdCore) //Required to boot vue material
+Vue.use(VueMaterial.MdButton)
+Vue.use(VueMaterial.MdIcon)
+Vue.use(VueMaterial.MdToolbar)
+Vue.use(VueMaterial.MdWhiteframe)
 
 export {app, router, store}
