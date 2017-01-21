@@ -5,12 +5,15 @@
       {{ count }}
     </div>
 
-    <div layout="row" align="center">
+    <div layout="row" align="center center" layout-xs="column">
       <md-button @click="$store.commit('INCREMENT')">Increment</md-button>
       <md-button @click="$store.commit('DECREMENT')">Decrement</md-button>
       <md-button @click="$store.dispatch('incrementAsync')">Increment Async</md-button>
     </div>
+    <div flex></div>
+    <div style="width: 100%; height: 50px; background: blue;"></div>
   </div>
+
 </template>
 
 <script>

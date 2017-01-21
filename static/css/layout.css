@@ -103,114 +103,9 @@
 
 
 /* Responsive Breakpoints */
-/* XL */
-@media (min-width: 1904px) {
-  [flex-xl]{
-    flex: 1 1;
-    -ms-flex: 1 1;
-  }
 
-  [hide-xl]{
-    display: none;
-  }
-
-  [layout-xl="frame"]{
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-  }
-
-  [layout-xl="page"]{
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 100%;
-  }
-
-  /* ROW */
-  [layout-xl="row"]{
-    display: flex;
-    flex-direction: row;
-  }
-
-  [layout-xl="row"][align-xl^="space-between"]{
-    justify-content: space-between;
-  }
-  [layout-xl="row"][align-xl^="center"]{
-    justify-content: center;
-  }
-  [layout-xl="row"][align-xl^="space-around"]{
-    justify-content: space-around;
-  }
-  [layout-xl="row"][align-xl^="start"]{
-    justify-content: flex-start;
-  }
-  [layout-xl="row"][align-xl^="end"]{
-    justify-content: flex-end;
-  }
-
-  [layout-xl="row"][align-xl$="space-between"]{
-    align-items: space-between;
-  }
-  [layout-xl="row"][align-xl$="center"]{
-    align-items: center;
-  }
-  [layout-xl="row"][align-xl$="space-around"]{
-    align-items: space-around;
-  }
-  [layout-xl="row"][align-xl$="start"]{
-    align-items: flex-start;
-  }
-  [layout-xl="row"][align-xl$="end"]{
-    align-items: flex-end;
-  }
-
-  /* COLUMN */
-  [layout-xl="column"]{
-    display: flex;
-    flex-direction: column;
-  }
-  /*[layout-xl="column"] > * {
-    width: 100%;
-  }*/
-
-  [layout-xl="column"][align-xl^="space-between"]{
-    align-items: space-between;
-  }
-  [layout-xl="column"][align-xl^="center"]{
-    align-items: center;
-  }
-  [layout-xl="column"][align-xl^="space-around"]{
-    align-items: space-around;
-  }
-  [layout-xl="column"][align-xl^="start"]{
-    align-items: flex-start;
-  }
-  [layout-xl="column"][align-xl^="end"]{
-    align-items: flex-end;
-  }
-
-  [layout-xl="column"][align-xl$="space-between"]{
-    justify-content: space-between;
-  }
-  [layout-xl="column"][align-xl$="center"]{
-    justify-content: center;
-  }
-  [layout-xl="column"][align-xl$="space-around"]{
-    justify-content: space-around;
-  }
-  [layout-xl="column"][align-xl$="start"]{
-    justify-content: flex-start;
-  }
-  [layout-xl="column"][align-xl$="end"]{
-    justify-content: flex-end;
-  }
-}
 /* L */
-@media (max-width: 1903px) {
+@media (min-width: 1199px) {
   [flex-l]{
     flex: 1 1;
     -ms-flex: 1 1;
@@ -316,7 +211,7 @@
   }
 }
 /* M */
-@media (max-width: 1264px) {
+@media (max-width: 991px) {
   [flex-m]{
     flex: 1 1;
     -ms-flex: 1 1;
@@ -422,7 +317,7 @@
   }
 }
 /* S */
-@media (max-width: 944px) {
+@media (max-width: 767px) {
   [flex-s]{
     flex: 1 1;
     -ms-flex: 1 1;
@@ -528,7 +423,7 @@
   }
 }
 /* XS */
-@media (max-width: 600px) {
+@media (max-width: 575px) {
   [flex-xs]{
     flex: 1 1;
     -ms-flex: 1 1;
