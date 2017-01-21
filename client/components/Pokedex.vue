@@ -4,15 +4,15 @@
       Loading
     </template>
     <template v-else>
-      <div>
+      <div class="message">
         Hey {{ Trainer.name }}, you have {{ Trainer.pokemons.length }} pokemons in your pokedex
       </div>
-      <ul>
-        <li v-for="pokemon in pokemons" :key="pokemon.id">
+      <div class="row-start-center wrap">
+        <md-whiteframe class="box col-center-center" v-for="pokemon in pokemons" :key="pokemon.id">
           {{ pokemon.name }}
           <img :src="pokemon.url">
-        </li>
-      </ul>
+        </md-whiteframe>
+      </div>
 
       <input v-model="newName">
       <input v-model="newUrl">
@@ -69,3 +69,17 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+  .box{
+    width: 150px;
+    height: 150px;
+    padding: 20px;
+    margin: 10px;
+  }
+  .message{
+    font-size: 18px;
+    padding: 20px;
+    text-align: center;
+  }
+</style>
