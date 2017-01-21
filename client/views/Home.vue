@@ -1,13 +1,13 @@
 <template>
-    <counter></counter>
+    <pokedex></pokedex>
 </template>
 
 <script>
-    import Counter from 'components/Counter'
+    import Pokedex from 'components/Pokedex'
 
         export default {
         components: {
-            Counter
+            Pokedex
         }
     }
 </script>

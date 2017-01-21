@@ -11,10 +11,12 @@
   "author": "Alex <xroker@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "apollo-client": "^0.7.3",
     "babel-runtime": "^6.18.0",
     "material-design-icons": "^3.0.1",
     "promise-polyfill": "^6.0.2",
     "vue": "^2.1.0",
+    "vue-apollo": "^1.3.0",
     "vue-material": "^0.6.3",
     "vue-router": "^2.0.0",
     "vuex": "^2.0.0",
