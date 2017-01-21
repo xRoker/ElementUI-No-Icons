@@ -15,14 +15,13 @@
             <img :src="pokemon.url">
           </div>
         </md-whiteframe>
-      </div>
 
-      <input v-model="newName">
-      <input v-model="newUrl">
-      <button v-on:click="add(newName, newUrl)">Add</button>
+        <div @click="openNew()" class="new box col-center-center">+</div>
+      </div>
     </template>
     
-    <md-dialog ref="dialog">
+    <!-- Dialogs -->
+    <md-dialog ref="pokemon">
       <md-dialog-title>{{ selected.name }}</md-dialog-title>
 
       <md-dialog-content class="col-start-center">
@@ -34,12 +33,38 @@
       </md-dialog-content>
 
       <md-dialog-actions>
-        <md-button class="md-primary" @click="closeDialog()">Cancel</md-button>
-        <md-button class="md-primary" @click="closeDialog()">Save</md-button>
+        <md-button class="md-primary" @click="closePokemon()">Cancel</md-button>
+        <md-button class="md-primary" @click="closePokemon()">Save</md-button>
       </md-dialog-actions>
     </md-dialog>
-  </div>
 
+    <md-dialog ref="new">
+        <md-dialog-title>Add your Pokemon</md-dialog-title>
+
+        <md-dialog-content class="col-start-center">
+
+          <md-input-container>
+            <label>Pokemon name</label>
+            <md-input v-model="newName"></md-input>
+          </md-input-container>
+
+          <md-input-container>
+            <label>Image URL</label>
+            <md-input v-model="newUrl"></md-input>
+          </md-input-container>
+
+        </md-dialog-content>
+
+        <md-dialog-actions>
+          <md-button class="md-primary" @click="closeNew()">Cancel</md-button>
+          <md-button class="md-primary" @click="add(newName, newUrl)">Add</md-button>
+        </md-dialog-actions>
+      </md-dialog>
+    </div>
+
+
+
+  </div>
 </template>
 
 <script>
@@ -80,13 +105,20 @@ export default {
           trainerId: this.Trainer.id
         }
       })
+      this.closeNew();
     },
     openPokemon(pokemon) {
       this.selected = pokemon;
-      this.$refs["dialog"].open();
+      this.$refs["pokemon"].open();
     },
-    closeDialog() {
-      this.$refs["dialog"].close();
+    closePokemon() {
+      this.$refs["pokemon"].close();
+    },
+    openNew() {
+      this.$refs["new"].open();
+    },
+    closeNew() {
+      this.$refs["new"].close();
     }
   },
 
@@ -113,5 +145,17 @@ export default {
     font-size: 18px;
     padding: 20px;
     text-align: center;
+  }
+  .new{
+    border: 2px dashed grey;
+    border-radius: 15px;
+    color: grey;
+    font-size: 40px;
+    width: 150px;
+    height: 150px;
+  }
+  .new:hover{
+    border-color: #3f51b5;
+    color: #3f51b5;
   }
 </style>
