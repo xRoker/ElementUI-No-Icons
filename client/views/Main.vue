@@ -1,5 +1,5 @@
 <template>
-  <div id="main">
+  <div id="main" class="layout-page">
     <md-whiteframe>
       <md-toolbar>
         <md-button class="md-icon-button">
@@ -14,6 +14,6 @@
       </md-toolbar>
     </md-whiteframe>
     
-    <router-view></router-view>
+    <router-view class="layout-content"></router-view>
   </div>
 </template>
