@@ -8,9 +8,12 @@
         Hey {{ Trainer.name }}, you have {{ Trainer.pokemons.length }} pokemons in your pokedex
       </div>
       <div class="row-start-center wrap">
-        <md-whiteframe class="box col-center-center" v-for="pokemon in pokemons" :key="pokemon.id">
-          {{ pokemon.name }}
-          <img :src="pokemon.url">
+        <md-whiteframe v-for="pokemon in pokemons" :key="pokemon.id" class="box">
+          <md-ink-ripple />
+          <div @click="openPokemon(pokemon)" class="col-center-center">
+            {{ pokemon.name }}
+            <img :src="pokemon.url">
+          </div>
         </md-whiteframe>
       </div>
 
@@ -18,7 +21,25 @@
       <input v-model="newUrl">
       <button v-on:click="add(newName, newUrl)">Add</button>
     </template>
+    
+    <md-dialog ref="dialog">
+      <md-dialog-title>{{ selected.name }}</md-dialog-title>
+
+      <md-dialog-content class="col-start-center">
+        <img :src="selected.url">
+        <md-input-container>
+          <md-input v-model="selected.name"></md-input>
+        </md-input-container>
+        <md-button class="flex-1 md-raised md-accent">Delete Pokemon</md-button>
+      </md-dialog-content>
+
+      <md-dialog-actions>
+        <md-button class="md-primary" @click="closeDialog()">Cancel</md-button>
+        <md-button class="md-primary" @click="closeDialog()">Save</md-button>
+      </md-dialog-actions>
+    </md-dialog>
   </div>
+
 </template>
 
 <script>
@@ -35,7 +56,8 @@ export default {
     loading: 0,
     Poke: { name: ''},
     newName: '',
-    newUrl: ''
+    newUrl: '',
+    selected: {}
   }),
   // Apollo GraphQL
   apollo: {
@@ -49,7 +71,7 @@ export default {
   },
 
   methods: {
-    add: function(name, url){
+    add(name, url){
       this.$apollo.mutate({
         mutation: queries.Pokemons.create,
         variables: {
@@ -58,6 +80,13 @@ export default {
           trainerId: this.Trainer.id
         }
       })
+    },
+    openPokemon(pokemon) {
+      this.selected = pokemon;
+      this.$refs["dialog"].open();
+    },
+    closeDialog() {
+      this.$refs["dialog"].close();
     }
   },
 
@@ -72,10 +101,13 @@ export default {
 
 <style lang="scss">
   .box{
+    margin: 10px;
+    cursor: pointer;
+  }
+  .box div{
     width: 150px;
     height: 150px;
     padding: 20px;
-    margin: 10px;
   }
   .message{
     font-size: 18px;
