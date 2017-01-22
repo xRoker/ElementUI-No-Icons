@@ -8,6 +8,8 @@
         Hey {{ Trainer.name }}, you have {{ Trainer.pokemons.length }} pokemons in your pokedex
       </div>
       <div class="row-start-center wrap">
+      
+        <div @click="openNew()" class="new box col-center-center">+</div>
         <md-whiteframe v-for="pokemon in pokemons" :key="pokemon.id" class="box">
           <md-ink-ripple />
           <div @click="openPokemon(pokemon)" class="col-center-center">
@@ -16,7 +18,6 @@
           </div>
         </md-whiteframe>
 
-        <div @click="openNew()" class="new box col-center-center">+</div>
       </div>
     </template>
     
