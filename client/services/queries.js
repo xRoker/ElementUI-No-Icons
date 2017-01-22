@@ -25,14 +25,28 @@ export default class Queries {
                             trainer {
                                 id
                                 pokemons {
-                                id
-                                name
-                                url
+                                    id
+                                    name
+                                    url
                                 }
                             }
                         }
                     }
-                `
+                `,
+            subscribe: gql`
+                subscription {
+                    createPokemon{
+                        trainer {
+                            id
+                            pokemons{
+                                id
+                                name
+                                url
+                            }
+                        }
+                    }
+                }
+            `
         }
     }
 

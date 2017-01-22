@@ -93,13 +93,28 @@ export default {
         name: 'Alex',
       },
       loadingKey: 'loading',
-    }
+    },
+    subscribe: {
+      // When a tag is added
+      tags: {
+        query: queries.Pokemons.subscribe,
+        // Reactive variables
+        variables: null,
+        // Result hook
+        result(data) {
+          console.log(data);
+          // Let's update the local data
+          // this.tags.push(data.tagAdded);
+        },
+      },
+    },
   },
 
   methods: {
     add(name, url){
       this.$apollo.mutate({
         mutation: queries.Pokemons.create,
+        subscription: queries.Pokemons.subscribe,
         variables: {
           name: name,
           url: url,
@@ -128,8 +143,9 @@ export default {
     pokemons() {
       return this.Trainer.pokemons.slice().reverse()
     }
-  },
+  }
 };
+
 </script>
 
 <style lang="scss">
