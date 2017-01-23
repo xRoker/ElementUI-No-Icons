@@ -124,10 +124,18 @@ export default {
           url: url,
           trainerId: this.Trainer.id
         },
+        optimisticResponse: {
+          __typename: 'Mutation',
+          submitComment: {
+            __typename: 'Pokemon',
+            name: name,
+            url: url
+          },
+        },
         updateQueries: {
           TrainerQuery: (previousQueryResult, { mutationResult }) => {
             // clone the current object and update with the new entry.
-            const clone = JSON.parse(JSON.stringify(this.Trainer));
+            const clone = JSON.parse(JSON.stringify(previousQueryResult.Trainer));
             clone.pokemons.push(mutationResult.data.createPokemon) // cretePokemon - name of the query
             return {
               Trainer: clone
@@ -143,10 +151,13 @@ export default {
         variables: {
           id: id
         },
+        optimisticResponse: {
+          deletePokemon: id
+        },
         updateQueries: {
           TrainerQuery: (previousQueryResult, { mutationResult }) => {
             // clone the current object and update with the new entry.
-            const clone = JSON.parse(JSON.stringify(this.Trainer));
+            const clone = JSON.parse(JSON.stringify(previousQueryResult.Trainer));
             const deleteId = mutationResult.data.deletePokemon.id;
             const deleteIndex = clone.pokemons.findIndex(el => el.id === deleteId);
             clone.pokemons.splice(deleteIndex, 1); // remove element by index
