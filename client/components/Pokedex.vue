@@ -24,15 +24,7 @@
     <!-- Dialogs -->
     <md-dialog ref="pokemon">
       <md-dialog-title>{{ selected.name }}</md-dialog-title>
-
-      <md-dialog-content class="col-start-center">
-        <img :src="selected.url">
-        <md-input-container>
-          <md-input v-model="selected.name"></md-input>
-        </md-input-container>
-        <md-button @click="remove(selected.id)" class="flex-1 md-raised md-accent">Delete Pokemon</md-button>
-      </md-dialog-content>
-
+      <pokemon :obj="selected" :close="closePokemon"></pokemon>
       <md-dialog-actions>
         <md-button class="md-primary" @click="closePokemon()">Cancel</md-button>
         <md-button class="md-primary" @click="closePokemon()">Save</md-button>
@@ -73,6 +65,7 @@
 import gql from 'graphql-tag';
 import Queries from 'services/queries';
 const queries = new Queries();
+import Pokemon from 'components/Pokemon'
 
 // Component def
 export default {
@@ -145,30 +138,7 @@ export default {
       })
       this.closeNew();
     },
-    remove(id){
-      this.$apollo.mutate({
-        mutation: queries.Pokemons.delete,
-        variables: {
-          id: id
-        },
-        optimisticResponse: {
-          deletePokemon: id
-        },
-        updateQueries: {
-          TrainerQuery: (previousQueryResult, { mutationResult }) => {
-            // clone the current object and update with the new entry.
-            const clone = JSON.parse(JSON.stringify(previousQueryResult.Trainer));
-            const deleteId = mutationResult.data.deletePokemon.id;
-            const deleteIndex = clone.pokemons.findIndex(el => el.id === deleteId);
-            clone.pokemons.splice(deleteIndex, 1); // remove element by index
-            return {
-              Trainer: clone
-            }
-          },
-        },
-      })
-      this.closePokemon();
-    },
+
     openPokemon(pokemon) {
       this.selected = pokemon;
       this.$refs["pokemon"].open();
@@ -189,6 +159,10 @@ export default {
     pokemons() {
       return this.Trainer.pokemons.slice().reverse()
     }
+  },
+
+  components: {
+    Pokemon
   }
 };
 
