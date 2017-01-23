@@ -24,7 +24,7 @@
     <!-- Dialogs -->
     <md-dialog ref="pokemon">
       <md-dialog-title>{{ selected.name }}</md-dialog-title>
-      <pokemon :obj="selected" :close="closePokemon"></pokemon>
+      <pokemon :obj="selected" :close="closePokemon" :trainerId="Trainer.id"></pokemon>
       <md-dialog-actions>
         <md-button class="md-primary" @click="closePokemon()">Cancel</md-button>
         <md-button class="md-primary" @click="closePokemon()">Save</md-button>
@@ -32,28 +32,10 @@
     </md-dialog>
 
     <md-dialog ref="new">
-        <md-dialog-title>Add your Pokemon</md-dialog-title>
-
-        <md-dialog-content class="col-start-center">
-
-          <md-input-container>
-            <label>Pokemon name</label>
-            <md-input v-model="newName"></md-input>
-          </md-input-container>
-
-          <md-input-container>
-            <label>Image URL</label>
-            <md-input v-model="newUrl"></md-input>
-          </md-input-container>
-
-        </md-dialog-content>
-
-        <md-dialog-actions>
-          <md-button class="md-primary" @click="closeNew()">Cancel</md-button>
-          <md-button class="md-primary" @click="add(newName, newUrl)">Add</md-button>
-        </md-dialog-actions>
-      </md-dialog>
-    </div>
+      <md-dialog-title>Add your Pokemon</md-dialog-title>
+      <new :close="closeNew"></new>
+    </md-dialog>
+  </div>
 
 
 
@@ -66,6 +48,7 @@ import gql from 'graphql-tag';
 import Queries from 'services/queries';
 const queries = new Queries();
 import Pokemon from 'components/Pokemon'
+import New from 'components/New'
 
 // Component def
 export default {
@@ -74,8 +57,6 @@ export default {
     Trainer: { pokemons: [] },
     loading: 0,
     Poke: { name: ''},
-    newName: '',
-    newUrl: '',
     selected: {}
   }),
   // Apollo GraphQL
@@ -109,35 +90,6 @@ export default {
   },
 
   methods: {
-    add(name, url){
-      this.$apollo.mutate({
-        mutation: queries.Pokemons.create,
-        variables: {
-          name: name,
-          url: url,
-          trainerId: this.Trainer.id
-        },
-        optimisticResponse: {
-          __typename: 'Mutation',
-          submitComment: {
-            __typename: 'Pokemon',
-            name: name,
-            url: url
-          },
-        },
-        updateQueries: {
-          TrainerQuery: (previousQueryResult, { mutationResult }) => {
-            // clone the current object and update with the new entry.
-            const clone = JSON.parse(JSON.stringify(previousQueryResult.Trainer));
-            clone.pokemons.push(mutationResult.data.createPokemon) // cretePokemon - name of the query
-            return {
-              Trainer: clone
-            }
-          },
-        },
-      })
-      this.closeNew();
-    },
 
     openPokemon(pokemon) {
       this.selected = pokemon;
@@ -162,7 +114,8 @@ export default {
   },
 
   components: {
-    Pokemon
+    Pokemon,
+    New
   }
 };
 
