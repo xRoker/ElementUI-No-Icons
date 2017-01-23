@@ -22,17 +22,19 @@ export default class Queries {
             create: gql`
                     mutation NewPokemon($name: String!, $url: String, $trainerId: ID) {
                         createPokemon(name: $name, url: $url, trainerId: $trainerId) {
-                            trainer {
-                                id
-                                pokemons {
-                                    id
-                                    name
-                                    url
-                                }
-                            }
+                            id
+                            name
+                            url
                         }
                     }
                 `,
+            delete: gql`
+                mutation DeletePokemon($id: ID!){
+                    deletePokemon(id: $id){
+                        id
+                    }
+                }
+            `,
             subscribe: gql`
                 subscription {
                     createPokemon{

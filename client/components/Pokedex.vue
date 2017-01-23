@@ -30,7 +30,7 @@
         <md-input-container>
           <md-input v-model="selected.name"></md-input>
         </md-input-container>
-        <md-button class="flex-1 md-raised md-accent">Delete Pokemon</md-button>
+        <md-button @click="remove(selected.id)" class="flex-1 md-raised md-accent">Delete Pokemon</md-button>
       </md-dialog-content>
 
       <md-dialog-actions>
@@ -96,15 +96,20 @@ export default {
     },
     subscribe: {
       // When a tag is added
-      tags: {
+      pokemons: {
         query: queries.Pokemons.subscribe,
         // Reactive variables
         variables: null,
         // Result hook
-        result(data) {
-          console.log(data);
-          // Let's update the local data
-          // this.tags.push(data.tagAdded);
+        updateQueries: {
+          TrainerQuery: (previousQueryResult, { mutationResult }) => {
+            // clone the current object and update with the new entry.
+            const clone = JSON.parse(JSON.stringify(this.Trainer));
+            clone.pokemons.push(mutationResult.data.createPokemon) // cretePokemon - name of the query
+            return {
+              Trainer: clone
+            }
+          },
         },
       },
     },
@@ -114,14 +119,44 @@ export default {
     add(name, url){
       this.$apollo.mutate({
         mutation: queries.Pokemons.create,
-        subscription: queries.Pokemons.subscribe,
         variables: {
           name: name,
           url: url,
           trainerId: this.Trainer.id
-        }
+        },
+        updateQueries: {
+          TrainerQuery: (previousQueryResult, { mutationResult }) => {
+            // clone the current object and update with the new entry.
+            const clone = JSON.parse(JSON.stringify(this.Trainer));
+            clone.pokemons.push(mutationResult.data.createPokemon) // cretePokemon - name of the query
+            return {
+              Trainer: clone
+            }
+          },
+        },
       })
       this.closeNew();
+    },
+    remove(id){
+      this.$apollo.mutate({
+        mutation: queries.Pokemons.delete,
+        variables: {
+          id: id
+        },
+        updateQueries: {
+          TrainerQuery: (previousQueryResult, { mutationResult }) => {
+            // clone the current object and update with the new entry.
+            const clone = JSON.parse(JSON.stringify(this.Trainer));
+            const deleteId = mutationResult.data.deletePokemon.id;
+            const deleteIndex = clone.pokemons.findIndex(el => el.id === deleteId);
+            clone.pokemons.splice(deleteIndex, 1); // remove element by index
+            return {
+              Trainer: clone
+            }
+          },
+        },
+      })
+      this.closePokemon();
     },
     openPokemon(pokemon) {
       this.selected = pokemon;
