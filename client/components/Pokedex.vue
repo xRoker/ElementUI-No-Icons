@@ -23,10 +23,6 @@
     <!-- Dialogs -->
     <el-dialog title="Pokemon" v-model="dialogVisible" size="tiny">
       <pokemon :obj="selected" :close="closePokemon" :trainerId="Trainer.id"></pokemon>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
-      </span>
     </el-dialog>
 
     <el-dialog title="Add your Pokemon" v-model="newOpen" size="tiny">
