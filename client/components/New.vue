@@ -1,22 +1,15 @@
 <template>
-	<md-dialog-content class="col-start-center">
+	<div class="col-start-center dialog">
 
-		<md-input-container>
-			<label>Pokemon name</label>
-			<md-input v-model="newName"></md-input>
-		</md-input-container>
-
-		<md-input-container>
-			<label>Image URL</label>
-			<md-input v-model="newUrl"></md-input>
-		</md-input-container>
+		<el-input placeholder="Pokemon name" v-model="newName"></el-input>
+		<el-input placeholder="Image URL" v-model="newUrl"></el-input>
 
 		<div class="row-end-end">
-			<md-button class="md-primary" @click="close()">Cancel</md-button>
-			<md-button class="md-primary" @click="add(newName, newUrl)">Add</md-button>
+			<el-button @click="close()">Cancel</el-button>
+			<el-button type="primary" @click="add(newName, newUrl)">Add</el-button>
 		</div>
 
-	</md-dialog-content>
+	</div>
 </template>
 
 <script>
@@ -68,3 +61,9 @@ export default {
 	}
 }
 </script>
+
+<style lang="scss">
+	.el-input{
+		margin-bottom: 10px;
+	}
+</style>

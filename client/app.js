@@ -3,9 +3,7 @@ import {sync} from 'vuex-router-sync'
 import App from './components/App'
 import {VueApollo, apolloClient} from 'apollo-config'
 
-// Vue Material
-const VueMaterial = require('vue-material')
-require('vue-material/dist/vue-material.css')
+// Flex layout
 require('../static/css/layout.css')
 
 // Element UI
@@ -24,14 +22,5 @@ const app = new Vue({
 Vue.use(VueApollo, {
   apolloClient,
 });
-
-
-// Vue Material
-Vue.use(VueMaterial)
-// Vue.use(VueMaterial.MdCore) //Required to boot vue material
-// Vue.use(VueMaterial.MdButton)
-// Vue.use(VueMaterial.MdIcon)
-// Vue.use(VueMaterial.MdToolbar)
-// Vue.use(VueMaterial.MdWhiteframe)
 
 export {app, router}

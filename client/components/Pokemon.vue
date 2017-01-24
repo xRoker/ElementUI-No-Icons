@@ -1,11 +1,9 @@
 <template>
-	<md-dialog-content class="col-start-center">
+	<div class="col-around-center dialog">
 		<img :src="obj.url">
-		<md-input-container>
-			<md-input v-model="obj.name"></md-input>
-		</md-input-container>
-		<md-button @click="remove(obj.id)" class="flex-1 md-raised md-accent">Delete Pokemon</md-button>
-	</md-dialog-content>
+		<el-input placeholder="Pokemon name" v-model="obj.name"></el-input>
+		<el-button class="delete" @click="remove(obj.id)" type="danger">Delete Pokemon</el-button>
+	</div>
 </template>
 
 <script>
@@ -45,3 +43,14 @@ export default {
 		}
 }
 </script>
+
+<style>
+	.delete{
+		width: 100%;
+	}
+	img{
+		max-height: 110px;
+		width: auto;
+		margin-bottom: 10px;
+	}
+</style>

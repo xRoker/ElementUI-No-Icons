@@ -21,19 +21,17 @@
     </template>
     
     <!-- Dialogs -->
-    <md-dialog ref="pokemon">
-      <md-dialog-title>{{ selected.name }}</md-dialog-title>
+    <el-dialog title="Pokemon" v-model="dialogVisible" size="tiny">
       <pokemon :obj="selected" :close="closePokemon" :trainerId="Trainer.id"></pokemon>
-      <md-dialog-actions>
-        <md-button class="md-primary" @click="closePokemon()">Cancel</md-button>
-        <md-button class="md-primary" @click="closePokemon()">Save</md-button>
-      </md-dialog-actions>
-    </md-dialog>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
+      </span>
+    </el-dialog>
 
-    <md-dialog ref="new">
-      <md-dialog-title>Add your Pokemon</md-dialog-title>
+    <el-dialog title="Add your Pokemon" v-model="newOpen" size="tiny">
       <new :close="closeNew"></new>
-    </md-dialog>
+    </el-dialog>
   </div>
 
 
@@ -55,7 +53,8 @@ export default {
   data: () => ({
     Trainer: { pokemons: [] },
     loading: 0,
-    Poke: { name: ''},
+    dialogVisible: false,
+    newOpen: false,
     selected: {}
   }),
   // Apollo GraphQL
@@ -92,16 +91,16 @@ export default {
 
     openPokemon(pokemon) {
       this.selected = pokemon;
-      this.$refs["pokemon"].open();
+      this.dialogVisible = true;
     },
     closePokemon() {
-      this.$refs["pokemon"].close();
+      this.dialogVisible = false;
     },
     openNew() {
-      this.$refs["new"].open();
+      this.newOpen = true;
     },
     closeNew() {
-      this.$refs["new"].close();
+      this.newOpen = false;
     }
   },
 
@@ -126,6 +125,7 @@ export default {
     cursor: pointer;
     width: 150px;
     height: 150px;
+    font-size: 14px;
 
     img{
       width: 90px;
@@ -134,7 +134,7 @@ export default {
   }
 
   .message{
-    font-size: 18px;
+    font-size: 14px;
     padding: 20px;
     text-align: center;
   }
