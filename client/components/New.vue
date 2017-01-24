@@ -20,7 +20,7 @@ const queries = new Queries();
 
 // Component def
 export default {
-	props: ['close', 'trainer'],
+	props: ['close', 'trainerId'],
 
 	data: () => ({
 		newName: '',

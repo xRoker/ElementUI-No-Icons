@@ -30,7 +30,7 @@
     </el-dialog>
 
     <el-dialog title="Add your Pokemon" v-model="newOpen" size="tiny">
-      <new :close="closeNew"></new>
+      <new :close="closeNew" :trainerId="Trainer.id"></new>
     </el-dialog>
   </div>
 
