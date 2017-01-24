@@ -7,6 +7,11 @@ import {VueApollo, apolloClient} from 'apollo-config'
 const VueMaterial = require('vue-material')
 require('vue-material/dist/vue-material.css')
 require('../static/css/layout.css')
+
+// Element UI
+import Element from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
+Vue.use(Element)
 // Router
 import router from './router/router'
 

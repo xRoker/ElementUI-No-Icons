@@ -10,13 +10,12 @@
       <div class="row-start-center wrap">
       
         <div @click="openNew()" class="new box col-center-center">+</div>
-        <md-whiteframe v-for="pokemon in pokemons" :key="pokemon.id" class="box">
-          <md-ink-ripple />
+        <el-card v-for="pokemon in pokemons" :key="pokemon.id" class="box">
           <div @click="openPokemon(pokemon)" class="col-center-center">
             {{ pokemon.name }}
             <img :src="pokemon.url">
           </div>
-        </md-whiteframe>
+        </el-card>
 
       </div>
     </template>
@@ -125,12 +124,15 @@ export default {
   .box{
     margin: 10px;
     cursor: pointer;
-  }
-  .box div{
     width: 150px;
     height: 150px;
-    padding: 20px;
+
+    img{
+      width: 90px;
+      height: 90px;
+    }
   }
+
   .message{
     font-size: 18px;
     padding: 20px;
