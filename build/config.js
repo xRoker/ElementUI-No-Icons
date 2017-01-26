@@ -10,9 +10,7 @@ module.exports = {
   // add these dependencies to a standalone vendor bundle
   vendor: [
     'vue',
-    'vuex',
     'vue-router',
-    'vuex-router-sync',
     'promise-polyfill'
   ],
   // disable babelrc by default
