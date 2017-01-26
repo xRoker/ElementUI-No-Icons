@@ -1,11 +1,11 @@
 <template>
-  <div class="pokedex">
+  <div class="pokedex col-start-center">
     <template v-if="loading > 0">
       Loading
     </template>
     <template v-else>
       <div class="message">
-        Hey {{ Trainer.name }}, you have {{ Trainer.pokemons.length }} pokemons in your pokedex
+        Hey {{ Trainer.name }}, you have {{ Trainer._pokemonsMeta.count }} pokemons in your pokedex
       </div>
       <div class="row-start-center wrap">
       
@@ -19,6 +19,14 @@
 
       </div>
     </template>
+
+    <el-pagination 
+      layout="prev, pager, next" 
+      :page-size="POKEMONS_PER_PAGE"
+      :current-page="+$route.params.page"
+      @current-change="pageChange"
+      :total="18">
+    </el-pagination>
     
     <!-- Dialogs -->
     <el-dialog title="Pokemon" v-model="dialogVisible" size="tiny">
@@ -51,14 +59,20 @@ export default {
     loading: 0,
     dialogVisible: false,
     newOpen: false,
-    selected: {}
+    selected: {},
+    POKEMONS_PER_PAGE: 5
   }),
   // Apollo GraphQL
   apollo: {
     Trainer: {
       query: queries.Trainers.get,
-      variables: {
-        name: 'Alex',
+      variables() {
+        // Use vue reactive properties here
+        return {
+            name: 'Alex',
+            first: this.POKEMONS_PER_PAGE,
+            skip: (this.$route.params.page-1)*this.POKEMONS_PER_PAGE
+        };
       },
       loadingKey: 'loading',
     },
@@ -88,6 +102,7 @@ export default {
     openPokemon(pokemon) {
       this.selected = pokemon;
       this.dialogVisible = true;
+      console.log('name: '+this.name);
     },
     closePokemon() {
       this.dialogVisible = false;
@@ -97,6 +112,9 @@ export default {
     },
     closeNew() {
       this.newOpen = false;
+    },
+    pageChange(val) {
+      this.$router.push({ name: 'pokedex', params: { page: val }})
     }
   },
 

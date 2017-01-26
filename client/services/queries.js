@@ -4,15 +4,18 @@ export default class Queries {
     constructor(){
         this.Trainers = {
             get: gql`
-                query TrainerQuery($name: String!) {
+                query TrainerQuery($name: String!, $first: Int!, $skip: Int!) {
                     Trainer(name: $name) {
-                    id
-                    name
-                    pokemons {
                         id
                         name
-                        url
-                    }
+                        pokemons(first: $first, skip: $skip) {
+                            id
+                            name
+                            url
+                        }
+                        _pokemonsMeta{
+                            count
+                        }
                     }
                 }
             `

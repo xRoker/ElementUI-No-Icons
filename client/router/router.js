@@ -13,8 +13,13 @@ export default new Router({
       component: Main,
       children: [
         {
-          path: '/',
+          name: 'pokedex',
+          path: '/:page',
           component: Home
+        },
+        {
+          path: '/',
+          redirect: '/1'
         }
       ]
     },
