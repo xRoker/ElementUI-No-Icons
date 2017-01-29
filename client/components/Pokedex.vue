@@ -25,7 +25,7 @@
       :page-size="POKEMONS_PER_PAGE"
       :current-page="+$route.params.page"
       @current-change="pageChange"
-      :total="18">
+      :total="Trainer._pokemonsMeta.count">
     </el-pagination>
     
     <!-- Dialogs -->
@@ -53,7 +53,7 @@ import New from 'components/New'
 export default {
   // Local state
   data: () => ({
-    Trainer: { pokemons: [] },
+    Trainer: { pokemons: [], _pokemonsMeta: {count: 1} },
     loading: 0,
     dialogVisible: false,
     newOpen: false,
