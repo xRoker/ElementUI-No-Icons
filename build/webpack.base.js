@@ -47,15 +47,14 @@ module.exports = {
         loaders: ['babel-loader']
       },
       {
-        test: /\.(ico|jpg|png|gif|eot|otf|webp|ttf|woff|woff2)(\?.*)?$/,
-        loader: 'file-loader',
-        query: {
-          name: 'static/media/[name].[hash:8].[ext]'
-        }
-      },
-      {
-        test: /\.svg$/,
-        loader: 'raw-loader'
+        test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+        exclude: /favicon\.png$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 10000
+          }
+        }]
       }
     ]
   },
