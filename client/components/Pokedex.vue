@@ -5,6 +5,7 @@
     </template>
     <template v-else>
       <div class="message">
+        <md-icon md-src="icons/zi.svg" style="fill: #20a0ff;"></md-icon>
         Hey {{ Trainer.name }}, you have {{ Trainer._pokemonsMeta.count }} pokemons in your pokedex
       </div>
       <div class="row-start-center wrap">
@@ -48,9 +49,16 @@ import Queries from 'services/queries';
 const queries = new Queries();
 import Pokemon from 'components/Pokemon'
 import New from 'components/New'
+import mdIcon from 'components/mdIcon'
 
 // Component def
 export default {
+
+  components: {
+    Pokemon,
+    New,
+    mdIcon
+  },
   // Local state
   data: () => ({
     Trainer: { pokemons: [], _pokemonsMeta: {count: 1} },
@@ -121,11 +129,6 @@ export default {
     pokemons() {
       return this.Trainer.pokemons.slice().reverse()
     }
-  },
-
-  components: {
-    Pokemon,
-    New
   }
 };
 
