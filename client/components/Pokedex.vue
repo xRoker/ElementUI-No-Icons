@@ -108,7 +108,6 @@ export default {
     openPokemon(pokemon) {
       this.selected = pokemon;
       this.dialogVisible = true;
-      console.log('name: '+this.name);
     },
     closePokemon() {
       this.dialogVisible = false;

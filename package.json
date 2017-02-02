@@ -1,7 +1,7 @@
 {
-  "name": "pokevue",
+  "name": "vue-template",
   "version": "0.1.0",
-  "description": "Vue Test",
+  "description": "Vue + Apollo + ElementUI",
   "main": "client/index.js",
   "scripts": {
     "test": "echo lol",

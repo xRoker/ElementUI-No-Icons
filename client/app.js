@@ -10,7 +10,7 @@ import Element from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 Vue.use(Element)
 // Router
-import router from './router/router'
+import router from './router'
 
 const app = new Vue({
   router,
